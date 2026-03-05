@@ -1,6 +1,8 @@
 import { Routes } from '@angular/router';
-import { PublicLayoutComponent } from './layouts/public-layout/public-layout.component';
-import { LoginComponent } from './features/auth/login/login.component';
+import { PublicLayoutComponent } from '@app/layouts/public-layout/public-layout.component';
+import { PrivateLayoutComponent } from '@app/layouts/private-layout/private-layout.component';
+import { AuthGuard } from '@app/core/guards/auth.guard';
+import { LoginComponent } from '@features/auth/login/login.component';
 
 export const routes: Routes = [
   {
@@ -9,6 +11,14 @@ export const routes: Routes = [
     children: [
       { path: '', redirectTo: 'login', pathMatch: 'full' },
       { path: 'login', component: LoginComponent }
+    ]
+  },
+  {
+    path: '',
+    component: PrivateLayoutComponent,
+    canActivate: [AuthGuard],
+    children: [
+      { path: 'users', component: LoginComponent },
     ]
   },
   { path: '**', redirectTo: 'login' }

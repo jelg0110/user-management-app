@@ -1,4 +1,5 @@
-import { Injectable, signal, computed } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { delay, of } from 'rxjs';
 
 interface UserCredential {
@@ -8,6 +9,7 @@ interface UserCredential {
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
+  private snackBar = inject(MatSnackBar);
 
   private readonly mockUsers: UserCredential[] = [
     { username: "user123", password: "Password1!" },
@@ -17,39 +19,70 @@ export class AuthService {
     { username: "admin_user", password: "AdminPass5^" }
   ];
 
-  private _isAuthenticated = signal(false);
+  private _user = signal<UserCredential | null>(this.loadFromStorage());
+  user = this._user.asReadonly();
+
   private _loading = signal(false);
   private _error = signal<string | null>(null);
 
-  isAuthenticated = computed(() => this._isAuthenticated());
-  loading = computed(() => this._loading());
-  error = computed(() => this._error());
+  loading = this._loading.asReadonly();
+  error = this._error.asReadonly();
+
+  constructor() { }
+
+  isAuthenticated(): boolean {
+    return !!this._user();
+  }
 
   login(credentials: UserCredential) {
-
     this._loading.set(true);
     this._error.set(null);
 
-    return of(this.mockUsers).pipe(delay(500)).subscribe(users => {
+    return of(this.mockUsers)
+      .pipe(delay(500))
+      .subscribe(users => {
+        const validUser = users.find(
+          u =>
+            u.username === credentials.username &&
+            u.password === credentials.password
+        );
 
-      const validUser = users.find(
-        u =>
-          u.username === credentials.username &&
-          u.password === credentials.password
-      );
+        if (validUser) {
+          this._user.set(validUser);
+          this.saveToStorage(validUser);
+        } else {
+          const message = 'Invalid username or password';
+          this._error.set(message);
+          this.snackBar.open(message, 'Close', { duration: 3000 });
+          this._user.set(null);
+          this.clearStorage();
+        }
 
-      if (validUser) {
-        this._isAuthenticated.set(true);
-      } else {
-        this._error.set('Invalid username or password');
-        this._isAuthenticated.set(false);
-      }
-
-      this._loading.set(false);
-    });
+        this._loading.set(false);
+      });
   }
 
   logout() {
-    this._isAuthenticated.set(false);
+    this._user.set(null);
+    this.clearStorage();
+  }
+
+  getToken(): string {
+    return this._user() ? btoa(this._user()!.username) : '';
+  }
+
+  private readonly localStorageKey = 'user';
+
+  private saveToStorage(user: UserCredential) {
+    localStorage.setItem(this.localStorageKey, JSON.stringify(user));
+  }
+
+  private loadFromStorage(): UserCredential | null {
+    const data = localStorage.getItem(this.localStorageKey);
+    return data ? JSON.parse(data) : null;
+  }
+
+  private clearStorage() {
+    localStorage.removeItem(this.localStorageKey);
   }
 }
