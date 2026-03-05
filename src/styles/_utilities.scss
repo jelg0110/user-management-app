@@ -1,0 +1,65 @@
+// Center helpers
+.centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.full-height {
+  min-height: 100vh;
+}
+
+// Text alignment
+.text-center {
+  text-align: center;
+}
+.text-right {
+  text-align: right;
+}
+
+// Width helpers
+.full-width {
+  width: 100%;
+}
+
+// Cursor
+.pointer {
+  cursor: pointer;
+}
+
+// Colors
+.text-primary {
+  color: var(--mat-sys-primary);
+}
+
+.text-success {
+  color: var(--app-success);
+}
+
+.text-error {
+  color: var(--mat-sys-error);
+}
+
+.text-muted {
+  color: var(--mat-sys-on-surface-variant);
+}
+
+// Texts
+.text-strong {
+  font-weight: 600;
+}
+
+// Global overrides
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear {
+  display: none;
+}
+
+input[type="password"]::-webkit-credentials-auto-fill-button,
+input[type="password"]::-webkit-textfield-decoration-container {
+  display: none !important;
+}
+
+a {
+  text-decoration: none;
+}
