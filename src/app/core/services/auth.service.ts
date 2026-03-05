@@ -1,5 +1,6 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { delay, of } from 'rxjs';
 
 interface UserCredential {
@@ -10,6 +11,7 @@ interface UserCredential {
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private snackBar = inject(MatSnackBar);
+  private router = inject(Router);
 
   private readonly mockUsers: UserCredential[] = [
     { username: "user123", password: "Password1!" },
@@ -19,6 +21,7 @@ export class AuthService {
     { username: "admin_user", password: "AdminPass5^" }
   ];
 
+  private readonly localStorageKey = 'user';
   private _user = signal<UserCredential | null>(this.loadFromStorage());
   user = this._user.asReadonly();
 
@@ -65,13 +68,12 @@ export class AuthService {
   logout() {
     this._user.set(null);
     this.clearStorage();
+    this.router.navigate(['/login']);
   }
 
   getToken(): string {
     return this._user() ? btoa(this._user()!.username) : '';
   }
-
-  private readonly localStorageKey = 'user';
 
   private saveToStorage(user: UserCredential) {
     localStorage.setItem(this.localStorageKey, JSON.stringify(user));
@@ -79,6 +81,7 @@ export class AuthService {
 
   private loadFromStorage(): UserCredential | null {
     const data = localStorage.getItem(this.localStorageKey);
+    // console.log(data);
     return data ? JSON.parse(data) : null;
   }
 
