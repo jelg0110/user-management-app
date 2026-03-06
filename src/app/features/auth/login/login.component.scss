@@ -1,0 +1,15 @@
+@use '../../../../styles/responsive' as *;
+
+.login-image {
+  width: 200px;
+  max-width: 100%;
+  height: auto;
+}
+
+.container {
+  height: calc(100vh - 2rem);
+
+  @include bp-down(sm) {
+    align-items: start;
+  }
+}

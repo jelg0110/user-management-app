@@ -1,0 +1,46 @@
+@use "sass:map";
+
+$breakpoints: (
+  xs: 0px,
+  sm: 600px,
+  md: 960px,
+  lg: 1280px,
+  xl: 1920px
+);
+
+@mixin bp-down($size) {
+  $value: map.get($breakpoints, $size);
+
+  @if $value == null {
+    @error "Invalid breakpoint `#{$size}`. Allowed: #{map.keys($breakpoints)}";
+  }
+
+  @media (max-width: $value) {
+    @content;
+  }
+}
+
+@mixin bp-up($size) {
+  $value: map.get($breakpoints, $size);
+
+  @if $value == null {
+    @error "Invalid breakpoint `#{$size}`. Allowed: #{map.keys($breakpoints)}";
+  }
+
+  @media (min-width: $value) {
+    @content;
+  }
+}
+
+@mixin bp-between($min, $max) {
+  $minValue: map.get($breakpoints, $min);
+  $maxValue: map.get($breakpoints, $max);
+
+  @if $minValue == null or $maxValue == null {
+    @error "Invalid breakpoint. Allowed: #{map.keys($breakpoints)}";
+  }
+
+  @media (min-width: $minValue) and (max-width: $maxValue) {
+    @content;
+  }
+}

@@ -1,0 +1,90 @@
+// Center helpers
+.centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.full-height {
+  min-height: 100vh;
+}
+
+// Text alignment
+.text-center {
+  text-align: center;
+}
+.text-right {
+  text-align: right;
+}
+
+// Width helpers
+.full-width {
+  width: 100%;
+}
+
+// Cursor
+.pointer {
+  cursor: pointer;
+}
+
+// Colors
+.text-primary {
+  color: var(--mat-sys-primary);
+}
+
+.text-success {
+  color: var(--app-success);
+}
+
+.text-error {
+  color: var(--mat-sys-error);
+}
+
+.text-muted {
+  color: var(--mat-sys-on-surface-variant);
+}
+
+// Texts
+.text-strong {
+  font-weight: 600;
+}
+
+// icon sizes
+.icon-small {
+  font-size: 16px;
+  width: 16px !important;
+  height: 16px !important;
+}
+.icon-medium {
+  font-size: 32px;
+  width: 32px !important;
+  height: 32px !important;
+}
+.icon-large {
+  font-size: 56px;
+  width: 56px !important;
+  height: 56px !important;
+}
+
+// Global overrides
+input[type='password']::-ms-reveal,
+input[type='password']::-ms-clear {
+  display: none;
+}
+
+input[type='password']::-webkit-credentials-auto-fill-button,
+input[type='password']::-webkit-textfield-decoration-container {
+  display: none !important;
+}
+
+a {
+  text-decoration: none;
+}
+
+.mat-mdc-list-item.active {
+  background-color: var(--mat-sys-primary-container);
+}
+
+.mat-mdc-card {
+  background-color: var(--mat-sys-surface) !important;
+}
