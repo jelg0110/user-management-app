@@ -22,6 +22,11 @@
   gap: 1rem;
   align-items: center;
 }
+.row-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .row-between {
   display: flex;
   justify-content: space-between;

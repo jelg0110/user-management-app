@@ -22,7 +22,6 @@ import { getFormErrorMessage } from '@shared/utils/form-error.util';
   ]
 })
 export class LoginComponent {
-
   private fb = inject(FormBuilder);
   private auth = inject(AuthService);
   private router = inject(Router);
@@ -35,6 +34,12 @@ export class LoginComponent {
   loading = this.auth.loading;
   error = this.auth.error;
   hide = signal(true);
+
+  private _navigateEffect = effect(() => {
+    if (this.auth.isAuthenticated()) {
+      this.router.navigate(['/users']);
+    }
+  });
 
   passwordClickEvent(event: MouseEvent) {
     this.hide.set(!this.hide());
@@ -52,11 +57,5 @@ export class LoginComponent {
     }
 
     this.auth.login(this.form.value as any);
-
-    effect(() => {
-      if (this.auth.isAuthenticated()) {
-        this.router.navigate(['/users']);
-      }
-    });
   }
 }

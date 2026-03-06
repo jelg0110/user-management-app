@@ -1,0 +1,43 @@
+@use '@angular/material' as mat;
+
+.layout-container {
+  background-color: #f1f1f1;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.sidebar-container {
+  height: calc(100vh - 64px - 1rem);
+  background-color: #f1f1f1;
+  margin: 1rem;
+  flex: 1;
+}
+
+.sidebar-content {
+  margin-left: 1rem;
+  padding: 1rem;
+  height: calc(100vh - 64px - 3rem);
+  box-sizing: border-box;
+}
+
+.toolbar {
+  width: 100%;
+}
+
+.example-is-mobile {
+  .sidebar-container {
+    flex: 1 0 auto;
+    margin-top: 56px;
+  }
+
+  .sidebar-content {
+    margin-left: 0;
+  }
+
+  .toolbar {
+    position: fixed;
+    z-index: 2;
+  }
+}
