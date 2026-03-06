@@ -12,7 +12,7 @@
   width: 200px;
 
   @include bp-down(sm) {
-    width: 120px;
+    width: 150px;
   }
 }
 
