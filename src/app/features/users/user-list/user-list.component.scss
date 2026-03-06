@@ -1,0 +1,22 @@
+@use '../../../../styles/responsive' as *;
+
+.list-container {
+  width: 100%;
+  gap: 1rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.card-size {
+  width: 200px;
+
+  @include bp-down(sm) {
+    width: 120px;
+  }
+}
+
+.active-card {
+  background-color: var(--mat-sys-primary) !important;
+  color: white;
+}

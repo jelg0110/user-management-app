@@ -1,6 +1,6 @@
-<div class="layout-container" [class.example-is-mobile]="isMobile()">
-  <div class="toolbar">
-    <app-header class="mb-2" (menuToggle)="toggleSidebar()"></app-header>
+<div class="layout-container" [class.is-mobile]="isMobile()">
+  <div class="toolbar mb-2">
+    <app-header (menuToggle)="toggleSidebar()"></app-header>
   </div>
   <mat-sidenav-container class="sidebar-container">
     <mat-sidenav #sidenav [opened]="sidebarOpened()" [mode]="isMobile() ? 'over' : 'side'" [fixedInViewport]="isMobile()" fixedTopGap="56">
