@@ -17,7 +17,7 @@ import { AuthService } from '@app/core/services/auth.service';
         </button>
         <button matButton [matMenuTriggerFor]="profileMenu" class="custom-button">
           <mat-icon matListAvatar>account_circle</mat-icon>
-          Menu
+          Username
           <mat-icon iconPositionEnd>keyboard_arrow_down</mat-icon>
         </button>
         <mat-menu #profileMenu="matMenu">
