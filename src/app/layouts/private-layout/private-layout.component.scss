@@ -17,7 +17,6 @@
 
 .sidebar-content {
   margin-left: 1rem;
-  padding: 1rem;
   height: calc(100vh - 64px - 3rem);
   box-sizing: border-box;
 }
@@ -26,10 +25,10 @@
   width: 100%;
 }
 
-.example-is-mobile {
+.is-mobile {
   .sidebar-container {
     flex: 1 0 auto;
-    margin-top: 56px;
+    margin-top: 72px;
   }
 
   .sidebar-content {

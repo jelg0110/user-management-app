@@ -1,3 +1,4 @@
+@use './responsive' as *;
 
 // Stack vertical
 .stack {
@@ -44,6 +45,9 @@
   gap: 1rem;
 }
 
+.grid-1 {
+  grid-template-columns: repeat(1, 1fr);
+}
 .grid-2 {
   grid-template-columns: repeat(2, 1fr);
 }
@@ -53,11 +57,20 @@
 .grid-4 {
   grid-template-columns: repeat(4, 1fr);
 }
+
 // Grid responsive automático
-.grid-auto-sm {
+.grid-auto {
   display: grid;
   gap: 1rem;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+// Order
+.order-1 {
+  order: 1;
+}
+.order-2 {
+  order: 2;
 }
 
 // Containers
@@ -74,4 +87,39 @@
 .container-lg {
   max-width: 1200px;
   margin: 0 auto;
+}
+
+@include bp-up(sm) {
+  .grid-sm-1 {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .grid-sm-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .grid-sm-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .grid-sm-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .grid-sm-auto {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+  .span-sm-2 {
+    grid-column: span 2;
+  }
+  .span-sm-3 {
+    grid-column: span 3;
+  }
+  .span-sm-4 {
+    grid-column: span 4;
+  }
+  .order-sm-1 {
+    order: 1;
+  }
+  .order-sm-2 {
+    order: 2;
+  }
 }

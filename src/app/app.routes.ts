@@ -1,10 +1,11 @@
 import { Routes } from '@angular/router';
 import { PublicLayoutComponent } from '@app/layouts/public-layout/public-layout.component';
 import { PrivateLayoutComponent } from '@app/layouts/private-layout/private-layout.component';
-import { AuthGuard } from '@app/core/guards/auth.guard';
+import { AuthGuard } from '@core/guards/auth.guard';
 import { LoginComponent } from '@features/auth/login/login.component';
-import { DashboardComponent } from '@app/features/dashboard/dashboard.component';
-import { UserListComponent } from '@app/features/users/user-list/user-list.component';
+import { DashboardComponent } from '@features/dashboard/dashboard.component';
+import { UserListComponent } from '@features/users/user-list/user-list.component';
+import { UserComponent } from '@features/users/user/user.component';
 
 export const routes: Routes = [
   {
@@ -22,6 +23,7 @@ export const routes: Routes = [
     children: [
       { path: 'dashboard', component: DashboardComponent },
       { path: 'users', component: UserListComponent },
+      { path: 'users/:id', component: UserComponent },
     ]
   },
   { path: '**', redirectTo: 'login' }

@@ -1,0 +1,31 @@
+@use '../../../../styles/responsive' as *;
+
+.user-detail {
+  padding: 1.5rem;
+
+  &-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+}
+
+.avatar-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.avatar-large {
+  width: 60%;
+  height: auto;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--mat-sys-outline);
+
+  @include bp-down(sm) {
+    width: 120px;
+    height: 120px;
+  }
+}

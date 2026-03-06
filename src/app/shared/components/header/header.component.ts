@@ -3,12 +3,13 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
-import { AuthService } from '@app/core/services/auth.service';
+import { AuthService } from '@core/services/auth.service';
+import { UserDisplayNamePipe } from '@shared/pipes/user-display-name.pipe';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [MatToolbarModule, MatIconModule, MatButtonModule, MatMenuModule],
+  imports: [MatToolbarModule, MatIconModule, MatButtonModule, MatMenuModule, UserDisplayNamePipe],
   template: `
     <mat-toolbar color="primary" class="row-between ">
       <div class="row-center">
@@ -17,7 +18,7 @@ import { AuthService } from '@app/core/services/auth.service';
         </button>
         <button matButton [matMenuTriggerFor]="profileMenu" class="custom-button">
           <mat-icon matListAvatar>account_circle</mat-icon>
-          Username
+          {{ auth.user() | userDisplayName }}
           <mat-icon iconPositionEnd>keyboard_arrow_down</mat-icon>
         </button>
         <mat-menu #profileMenu="matMenu">
@@ -31,7 +32,7 @@ import { AuthService } from '@app/core/services/auth.service';
   `
 })
 export class HeaderComponent {
-  private auth = inject(AuthService);
+  auth = inject(AuthService);
   @Output() menuToggle = new EventEmitter<void>();
 
   onLogout(event: MouseEvent) {
